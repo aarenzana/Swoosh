@@ -1,30 +1,40 @@
 package com.aaldev.swoosh.Controller
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.view.View
 import android.widget.Toast
-import com.aaldev.swoosh.Utilities.EXTRA_LEAGUE
+import com.aaldev.swoosh.Model.Player
 import com.aaldev.swoosh.R
+import com.aaldev.swoosh.Utilities.EXTRA_PLAYER
 import kotlinx.android.synthetic.main.activity_league.*
 
-class LeagueActivity : AppCompatActivity() {
+class LeagueActivity : BaseActivity() {
 
-    var selectedLeague = ""
-//    val TAG = "leagueSelector"
-//
-//    val myLeagues = arrayListOf<String>()
+    var player = Player("", "")
+
+    override fun onSaveInstanceState(outState: Bundle?) {
+        super.onSaveInstanceState(outState)
+        outState?.putParcelable(EXTRA_PLAYER, player)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_league)
     }
 
+    override fun onRestoreInstanceState(savedInstanceState: Bundle?) {
+        super.onRestoreInstanceState(savedInstanceState)
+        if(savedInstanceState != null) {
+            player = savedInstanceState.getParcelable(EXTRA_PLAYER)!!
+        }
+    }
+
     fun leagueNextClicked(view: View) {
-        if(selectedLeague != ""){
+        if(player.league != ""){
             val skillActivity = Intent(this, SkillActivity::class.java)
-            skillActivity.putExtra(EXTRA_LEAGUE, selectedLeague)
+            skillActivity.putExtra(EXTRA_PLAYER, player)
             startActivity(skillActivity)
         } else {
             Toast.makeText(this, "Please select a league", Toast.LENGTH_SHORT).show()
@@ -37,9 +47,9 @@ class LeagueActivity : AppCompatActivity() {
         coedLeagueBtn.isChecked = false
 
         if(mensLeagueBtn.isChecked){
-            selectedLeague = "mens"
+            player.league = "mens"
         } else {
-            selectedLeague = ""
+            player.league = ""
         }
 
     }
@@ -49,9 +59,9 @@ class LeagueActivity : AppCompatActivity() {
         coedLeagueBtn.isChecked = false
 
         if(womensLeagueBtn.isChecked){
-            selectedLeague = "womens"
+            player.league = "womens"
         } else {
-            selectedLeague = ""
+            player.league = ""
         }
     }
 
@@ -60,22 +70,11 @@ class LeagueActivity : AppCompatActivity() {
         womensLeagueBtn.isChecked = false
 
         if(coedLeagueBtn.isChecked){
-            selectedLeague = "coed"
+            player.league = "coed"
         } else {
-            selectedLeague = ""
+            player.league = ""
         }
     }
-
-//    fun fileAndLog(ltype: String) {
-//        if(myLeagues.contains(ltype)){
-//            myLeagues.remove(ltype)
-//        } else {
-//            myLeagues.add(ltype)
-//        }
-//        Log.d(TAG, selectedLeague)
-//        Log.d(TAG, "array:" + myLeagues)
-//    }
-
 
 
 
