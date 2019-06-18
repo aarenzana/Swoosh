@@ -1,12 +1,13 @@
-package com.aaldev.swoosh
+package com.aaldev.swoosh.Controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.aaldev.swoosh.R
 
-class SkillActivity : AppCompatActivity() {
+class FinishActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_skill)
+        setContentView(R.layout.activity_finish)
     }
 }
