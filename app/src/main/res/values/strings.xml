@@ -13,4 +13,8 @@
     </string>
     <string name="get_started">GET STARTED</string>
     <string name="welcomescreen_bg">Welcome screen background</string>
+    <string name="skill_level">I am a:</string>
+    <string name="beginner">BEGINNER</string>
+    <string name="baller">BALLER</string>
+    <string name="finish">Finish</string>
 </resources>
